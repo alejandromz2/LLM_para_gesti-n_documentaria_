@@ -19,3 +19,18 @@ Se planteó una arquitectura de proyecto fullstack, en la cual se cuenta tanto c
 
 ![Sin título (2)](https://github.com/user-attachments/assets/4932d0ac-6d9b-482a-8737-6f6a8c1c45db)
 
+En la Figura 1 se observa la arquitectura de la aplicación realizada, en la cual el usuario realiza una consulta mediante la interfaz frontend, la cual fue realizada con React. Esta interfaz cuenta con un mensaje predeterminado de bienvenida como se muestra en la Figura 2.
+
+![image](https://github.com/user-attachments/assets/68925d3a-8088-40f7-b5e3-627f3d4a3731)
+
+La aplicación envía la pregunta mediante una solicitud POST a una API desarrollada en Node.js, que actúa como intermediaria entre el frontend y el backend. Esta API recibe las preguntas del usuario y las reenvía al backend implementado en Flask, encargado de acceder a la arquitectura RAG desarrollada. Para la arquitectura RAG, inicialmente se realizó un proceso de limpieza y preparación de los datos, ya que estos se encontraban en formato PDF. Fue necesario utilizar una librería OCR para extraer la información textual de los documentos. Una vez obtenidos los datos, estos se dividieron en chunks o fragmentos más pequeños. Posteriormente, se utilizó el tokenizer “all-MiniLM-L6-v2” de Hugging Face para convertir dichos chunks en embeddings (vectores numéricos). Estos embeddings se almacenaron en una base de datos vectorial Milvus, la cual se encuentra desplegada en un contenedor Docker.
+
+El backend en Flask queda a la espera de recibir una solicitud POST con una pregunta del usuario. Cuando la petición es recibida, la pregunta es transformada en un vector de consulta y enviada a la base de datos vectorial Milvus. Milvus devuelve los 3 embeddings más cercanos a la pregunta, los cuales se utilizan como contexto para enriquecer la interacción con el modelo de IA generativa. En este caso, el modelo utilizado es Llama3, encargado de generar la respuesta final. Una vez que la respuesta es generada por Llama3, esta es retornada al backend Flask, reenviada a la API en Node.js y, finalmente, mostrada al usuario en la interfaz Frontend.
+
+A continuación se muestran capturas de la aplicación en funcionamiento. Primero, en la Figura 3 se observa cómo interactúa el API de Node.js con la API de Flask para responder una pregunta.
+
+![image](https://github.com/user-attachments/assets/605ca9ee-cf36-44c4-829d-177a8a2b0e0b)
+
+Posteriormente, se muestra en la Figura 4 una prueba realizando una consulta general sobre un documento en específico. Podemos observar que se responde correctamente la pregunta en base a la información recuperada del documento “Vigencia Ing. Sandro Che - Chimu - Jefe de Sistemas - 29.11.23.pdf”. En el archivo main.py se puede observar como esta funcionando el modelo RAG, además se pueden observar los embeddings devueltos que han sido utilizados como contexto para responder la pregunta.
+
+![image](https://github.com/user-attachments/assets/9665a09d-7660-455f-93ea-56bb634200ae)
