@@ -34,3 +34,14 @@ A continuación se muestran capturas de la aplicación en funcionamiento. Primer
 Posteriormente, se muestra en la Figura 4 una prueba realizando una consulta general sobre un documento en específico. Podemos observar que se responde correctamente la pregunta en base a la información recuperada del documento “Vigencia Ing. Sandro Che - Chimu - Jefe de Sistemas - 29.11.23.pdf”. En el archivo main.py se puede observar como esta funcionando el modelo RAG, además se pueden observar los embeddings devueltos que han sido utilizados como contexto para responder la pregunta.
 
 ![image](https://github.com/user-attachments/assets/9665a09d-7660-455f-93ea-56bb634200ae)
+
+En la Figura 5, realizamos una prueba con uno de los documentos que se encuentran almacenados en la carpeta el cual habla sobre normas legales. Para ello, realizamos la pregunta sobre la ley de servicio civil y podemos observar cómo nos devuelve la respuesta correcta corroborando con el documento del costado. Además, al preguntarle sobre su función obtenemos una respuesta sobre el prompt que le hemos dado.
+
+![image](https://github.com/user-attachments/assets/45ad7cf3-964b-40ee-988b-6b2864808761)
+
+### 4. Conclusiones
+
+La implementación de esta arquitectura permite transformar documentos judiciales en información accesible y procesable mediante un flujo eficiente. La integración con el modelo de IA generativa Llama3 en una arquitectura RAG permitió generar respuestas contextualizadas y de alta calidad. La combinación de un backend desarrollado en Flask, una API intermediaria en Node.js y un Frontend interactivo en React ofrece una solución escalable y eficiente que optimiza la gestión y búsqueda de información compleja.
+
+Para un estudio de abogados, contar con esta aplicación facilita el proceso de análisis de grandes volúmenes de información judicial. La posibilidad de realizar consultas específicas y obtener respuestas en base al conocimiento almacenado permite la toma de decisiones estratégicas y un mejor manejo de la información. Esta herramienta no solo agiliza los procesos repetitivos de revisión de información de manera manual, sino que también permite a los especialistas poder tomar conclusiones más acertadas al contar con toda la información requerida. 
+
